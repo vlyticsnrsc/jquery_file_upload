@@ -12,3 +12,49 @@
   
   .progress.progress-striped.active
     .bar
+
+
+  / .row.fileupload-buttonbar
+  /   .span7
+  /     / The fileinput-button span is used to style the file input field as button
+  /     %span.btn.btn-success.fileinput-button
+  /       %i.icon-plus.icon-white
+  /       %span Add files...
+  /       %input{:multiple => "", :name => "files[]", :type => "file"}
+  /     %button.btn.btn-primary.start{:type => "submit"}
+  /       %i.icon-upload.icon-white
+  /       %span Start upload
+  /     %button.btn.btn-warning.cancel{:type => "reset"}
+  /       %i.icon-ban-circle.icon-white
+  /       %span Cancel upload
+  /     %button.btn.btn-danger.delete{:type => "button"}
+  /       %i.icon-trash.icon-white
+  /       %span Delete
+  /     %input.toggle{:type => "checkbox"}
+  /   / The global progress information
+  /   .span5.fileupload-progress.fade
+  /     / The global progress bar
+  /     .progress.progress-success.progress-striped.active{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
+  /       .bar{:style => "width:0%;"}
+  /     / The extended global progress information
+  /     .progress-extended  
+  / / The loading indicator is shown during file processing
+  / .fileupload-loading
+  / %br
+  /   / The table listing the files available for upload/download
+  /   %table.table.table-striped{:role => "presentation"}
+  /     %tbody.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
+      
+      
+/ s
+/   %input{type: :file, name: :file, accept: "image/*", capture: :camera, id: :file }
+/   
+/   .progress.progress-striped.active
+/     .bar
+/     
+/     
+/ 
+/ %form#fileupload{:action => "//jquery-file-upload.appspot.com/", :enctype => "multipart/form-data", :method => "POST"}
+/   / Redirect browsers with JavaScript disabled to the origin page
+/   %noscript <input type="hidden" name="redirect" value="http://blueimp.github.com/jQuery-File-Upload/">
+/   The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload

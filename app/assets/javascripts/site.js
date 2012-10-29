@@ -19,30 +19,49 @@ $(function(){ // on ready code goes here
 			},
 			{
 				action: 'resize',
-				maxWidth: 300,
-				maxHeight: 400
+				maxWidth: 960,
+				maxHeight: 1400
 			},
 			{
 				action: 'save'
 			}
 		],
 		add: function (event, data) {
-			$.ajax({
-				url: "/signed_url",
-				type: 'GET',
-				dataType: 'json',
-				data: {doc: {title: data.files[0].name}}, // send the file name to the server so it can generate the key param
-				async: false,
-				success: function(data) {
-				// Now that we have our data, we update the form so it contains all
-				// the needed data to sign the request
-					form.find('input[name=key]').val(data.key)
-					form.find('input[name=policy]').val(data.policy)
-					form.find('input[name=signature]').val(data.signature)
-				}
-			})
-			console.log('add')
-			data.submit();
+			$(this).fileupload('process', data).done(function () {
+				
+				$.ajax({
+					url: "/signed_url",
+					type: 'GET',
+					dataType: 'json',
+					data: {doc: {title: data.files[0].name}}, // send the file name to the server so it can generate the key param
+					async: false,
+					success: function(keys) {
+					// Now that we have our data, we update the form so it contains all
+					// the needed data to sign the request
+						form.find('input[name=key]').val(keys.key)
+						form.find('input[name=policy]').val(keys.policy)
+						form.find('input[name=signature]').val(keys.signature)
+						data.submit();
+					}
+				})
+			});
+			
+			
+			// $.ajax({
+			// 	url: "/signed_url",
+			// 	type: 'GET',
+			// 	dataType: 'json',
+			// 	data: {doc: {title: data.files[0].name}}, // send the file name to the server so it can generate the key param
+			// 	async: false,
+			// 	success: function(data) {
+			// 	// Now that we have our data, we update the form so it contains all
+			// 	// the needed data to sign the request
+			// 		form.find('input[name=key]').val(data.key)
+			// 		form.find('input[name=policy]').val(data.policy)
+			// 		form.find('input[name=signature]').val(data.signature)
+			// 	}
+			// })
+			// data.submit();
 		}, send: function(e, data) {
 			$('.progress').fadeIn();
 		}, progress: function(e, data){
@@ -64,5 +83,6 @@ $(function(){ // on ready code goes here
 				$('.bar').css('width', 0)
 			})
 		},
-	})
+	});
+	
 })
