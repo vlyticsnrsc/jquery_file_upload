@@ -5,6 +5,10 @@ function test() {
 }
 
 $(function(){ // on ready code goes here
+	
+	if ($.support.cors)
+		$.ajax({ url: 'http://truecount-localhost.s3.amazonaws.com', crossDomain : true, type: 'HEAD' });
+	
 	var form = $(this);
 	$('.direct-upload').fileupload({
 		url: form.attr('action'),
@@ -19,8 +23,8 @@ $(function(){ // on ready code goes here
 			},
 			{
 				action: 'resize',
-				maxWidth: 960,
-				maxHeight: 1400
+				maxWidth: 1024,
+				maxHeight: 1024
 			},
 			{
 				action: 'save'
