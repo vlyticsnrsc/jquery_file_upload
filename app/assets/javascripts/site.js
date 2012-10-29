@@ -9,8 +9,8 @@ $(function(){ // on ready code goes here
 	if ($.support.cors)
 		$.ajax({ url: 'http://truecount-localhost.s3.amazonaws.com', crossDomain : true, type: 'HEAD' });
 	
-	var form = $(this);
-	$('.direct-upload').fileupload({
+	var form = $('.direct-upload');
+	form.fileupload({
 		url: form.attr('action'),
 		type: 'POST',
 		// autoUpload: true,
@@ -31,8 +31,7 @@ $(function(){ // on ready code goes here
 			}
 		],
 		add: function (event, data) {
-			$(this).fileupload('process', data).done(function () {
-				
+			form.fileupload('process', data).done(function () {
 				$.ajax({
 					url: "/signed_url",
 					type: 'GET',
@@ -49,23 +48,6 @@ $(function(){ // on ready code goes here
 					}
 				})
 			});
-			
-			
-			// $.ajax({
-			// 	url: "/signed_url",
-			// 	type: 'GET',
-			// 	dataType: 'json',
-			// 	data: {doc: {title: data.files[0].name}}, // send the file name to the server so it can generate the key param
-			// 	async: false,
-			// 	success: function(data) {
-			// 	// Now that we have our data, we update the form so it contains all
-			// 	// the needed data to sign the request
-			// 		form.find('input[name=key]').val(data.key)
-			// 		form.find('input[name=policy]').val(data.policy)
-			// 		form.find('input[name=signature]').val(data.signature)
-			// 	}
-			// })
-			// data.submit();
 		}, send: function(e, data) {
 			$('.progress').fadeIn();
 		}, progress: function(e, data){
