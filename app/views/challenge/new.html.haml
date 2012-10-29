@@ -1,2 +1,14 @@
 %h1 Challenge
 %p Find me in app/views/challenge/new.html.erb
+
+%form.direct-upload.image.ss-icon(action="http://truecount-localhost.s3.amazonaws.com" method="post" enctype="multipart/form-data" class='direct-upload')
+  %input{type: :hidden, name: :key}
+  %input{type: :hidden, name: "AWSAccessKeyId", value: 'AKIAI4VR7IH4UHELL6JQ'}
+  %input{type: :hidden, name: :acl, value: 'public-read'}
+  %input{type: :hidden, name: :policy}
+  %input{type: :hidden, name: :signature}
+  %input{type: :hidden, name: :success_action_status, value: "201"}
+  %input{type: :file, name: :file, accept: "image/*", capture: :camera, id: :file }
+  
+  .progress.progress-striped.active
+    .bar

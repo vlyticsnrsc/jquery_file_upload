@@ -1,7 +1,4 @@
 JqueryFileUpload::Application.routes.draw do
-  
-  resources :signed_url, only: :index
-  
   get "challenge/index"
   get "challenge/new"
   get "challenge/show"
@@ -55,7 +52,7 @@ JqueryFileUpload::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'challenge#new'
-
+  match '/signed_url' => 'signed_urls#index'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
